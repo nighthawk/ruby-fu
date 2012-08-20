@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'fastercsv'
-
 # A helper class to load CSV data
 #
 # This assumes that the CSV data is stored in files called *.csv
@@ -16,6 +13,7 @@ class CsvData
   
   private
     def load_files(files)
+      require 'fastercsv'
       files.each do |f|
         name, rubbish = File.basename(f, ".csv").split('-')
         @data[name] ||= []

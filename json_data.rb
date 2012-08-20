@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'json'
-
 # A helper class to load JSON data
 #
 # This assumes that the JSON data is stored in files called *.json
@@ -21,6 +18,7 @@ class JsonData
 	
 private
 	def load_files(files)
+		require 'json'
 		files.each do |f| 
 			File.open(f, "r") do |io|
 				io.each_line { |line| @data << JSON.parse(line) }
