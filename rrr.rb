@@ -21,6 +21,30 @@ require "matrix"
 #     @r = RSRuby.instance
 
 class Rrr
+	def self.run(&block)
+		r = Rrr.new
+		yield r
+		r.off
+	end
+
+	def self.png(title, &block)
+		self.run do |r|
+			file = "#{title}.png"
+			puts "Plotting '#{title}' to #{file}..."
+			r.png(file)
+			yield r
+		end
+	end
+
+	def self.pdf(title, &block)
+		self.run do |r|
+			file = "#{title}.pdf"
+			puts "Plotting '#{title}' to #{file}..."
+			r.pdf(file)
+			yield r
+		end
+	end
+
 	def initialize
 		ENV["R_HOME"] ||= "/Library/Frameworks/R.framework/Resources"
 		@r = RSRuby.instance
